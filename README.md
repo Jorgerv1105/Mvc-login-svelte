@@ -1,46 +1,47 @@
-# Sistema CRUD y Login MVC con Svelte y MySQL
+# Sistema de Gestión de Inventario (SvelteKit + MVC)
 
-Este proyecto es una aplicación web básica desarrollada para la asignatura de Ingeniería Web. Implementa el patrón de arquitectura MVC, operaciones CRUD y un sistema de autenticación de rutas protegidas.
+Este proyecto es una aplicación web para la gestión de productos, desarrollada para la asignatura de Ingeniería Web. Implementa un sistema completo de autenticación y un CRUD protegido utilizando el patrón de diseño **MVC**.
 
-## Tecnologías Utilizadas 
-* **Framework:** SvelteKit (Proporciona la estructura MVC mediante rutas, server actions y hooks).
-* **Base de Datos:** MySQL (con la librería `mysql2`).
-* **Estilos:** CSS básico en línea.
+## 🚀 Características
 
-## Arquitectura MVC en SvelteKit
-* **Modelo:** Se gestiona en el archivo `src/lib/server/db.js` y mediante las consultas directas a la base de datos.
-* **Vista:** Archivos `+page.svelte` que renderizan el HTML y la interfaz de usuario.
-* **Controlador:** Archivos `+page.server.js` (procesan formularios y conectan Modelo con Vista) y `hooks.server.js` (middleware que evalúa la sesión).
+- **Autenticación Segura:** Registro e inicio de sesión con contraseñas encriptadas mediante `bcrypt`.
+- **Patrón MVC:** Separación clara entre Modelos (lógica de datos), Vistas (componentes Svelte) y Controladores (Server Actions).
+- **CRUD Completo:** Gestión de productos (Nombre, Precio, Categoría y Stock).
+- **Protección de Rutas:** Middleware que impide el acceso a la sección de inventario sin una sesión activa.
 
-## Instalación y Ejecución
-1. Clonar el repositorio.
-2. Ejecutar el script SQL incluido en tu gestor de base de datos MySQL local para crear las tablas y el usuario de prueba.
-3. Instalar dependencias con `npm install`.
-4. Ejecutar el servidor de desarrollo con `npm run dev`.
+## 🛠️ Tecnologías Utilizadas
 
-## Credenciales de prueba
-* **Usuario:** admin
-* **Contraseña:** 123
-* **Usuario** Jorge
-* **Contraseña** 1234
+- **Framework:** SvelteKit (Svelte 5)
+- **Base de Datos:** MySQL
+- **Estilos:** CSS3 Nativo
+- **Seguridad:** Bcrypt & Hooks Middleware
 
-## Script MySQL
- 
-* CREATE DATABASE ingenieria_web_tarea;
-* USE ingenieria_web_tarea;
+## 📁 Estructura del Proyecto (MVC)
 
-* CREATE TABLE usuarios (
-   * id INT AUTO_INCREMENT PRIMARY KEY,
-   * usuario VARCHAR(50) NOT NULL UNIQUE,
-   * password VARCHAR(50) NOT NULL
-* );
+- `src/lib/server/models/`: Contiene la lógica de conexión y consultas SQL (**Modelo**).
+- `src/routes/`: Contiene las vistas (`+page.svelte`) y los controladores (`+page.server.js`) (**Vista y Controlador**).
+- `src/hooks.server.js`: Controlador global para la protección de rutas (**Middleware**).
 
-* CREATE TABLE productos (
-   * id INT AUTO_INCREMENT PRIMARY KEY,
-   * nombre VARCHAR(100) NOT NULL,
-   * precio DECIMAL(10, 2) NOT NULL,
-   * categoria VARCHAR(100) NOT NULL
-* );
+## 🗄️ Script de la Base de Datos (SQL)
 
-* INSERT INTO usuarios (usuario, password) VALUES ('admin', '123');
-* INSERT INTO usuarios (usuario, password) VALUES ('Jorge', '1234');
+Debe crear una base de datos llamada `ingenieria_web_tarea` y ejecutar el siguiente script para que el sistema funcione correctamente:
+
+```sql
+CREATE DATABASE IF NOT EXISTS ingenieria_web_tarea;
+USE ingenieria_web_tarea;
+
+-- Tabla de Usuarios (Modelo de Usuario)
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Tabla de Productos (Modelo de Producto)
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    stock INT NOT NULL
+);
