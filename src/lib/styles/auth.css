@@ -1,0 +1,30 @@
+.auth-container {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background: #f9f9f9;
+}
+.auth-card {
+    background: white;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 350px;
+}
+.auth-form {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.auth-form input {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+}
+.btn-submit {
+    background: #222;
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    cursor: pointer;
+}
+.error-msg { color: red; font-size: 0.9rem; }
