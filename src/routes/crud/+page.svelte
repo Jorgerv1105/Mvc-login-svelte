@@ -69,9 +69,10 @@
         <form method="POST" action="?/actualizar">
             <h3>Editar Producto</h3>
             <input type="hidden" name="id" value={productoEditando.id}>
-            <input type="text" name="nombre" value={productoEditando.nombre}>
-            <input type="number" name="precio" value={productoEditando.precio}>
-            <input type="number" name="stock" value={productoEditando.stock}>
+            <input type="text" name="nombre" value={productoEditando.nombre} required>
+            <input type="number" step="0.01" name="precio" value={productoEditando.precio} required>
+            <input type="text" name="categoria" value={productoEditando.categoria} required>
+            <input type="number" name="stock" value={productoEditando.stock} required>
             <footer>
                 <button type="button" onclick={() => modalEditar.close()}>Cancelar</button>
                 <button type="submit">Actualizar</button>
